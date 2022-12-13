@@ -20,7 +20,6 @@ main();
 //ROUTES:
 app.get("/",(req, res) => {res.render("mainPage");});
 app.get("/playPage", (req,res) => {res.render("playPage");});
-app.get("/signUp",(req,res) => {res.render("signUp");});
 app.post("/gamePage",async (req,res) => {
 
     //Render HTML
