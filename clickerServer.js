@@ -47,6 +47,28 @@ app.post("/gamePage",async (req,res) => {
 
 });
 
+app.post("/savedSession", async (req, res) => {
+    let variables = {'totalClicks': 0}
+
+    const collection = client.db(database.db).collection(database.collection)
+    const result = await collection.findOne(session)
+    const {numOfClicks} = req.body
+  
+  if (result) {
+    const total = (result.numOfClicks + Number(numOfClicks))
+    collection.updateOne({name: result.name},{$set: {numOfClicks: total}})
+    // db.student.updateOne({name: "Annu"}, {$set:{age:25}})
+    
+    variables['totalClicks'] = numOfClicks
+  } else {
+    //user doesn't exist somehow
+    console.log("You're not supposed to be here")
+  }
+
+
+    res.render("savedSession", variables)
+})
+
 //TODO: FOR WHEN THE CLICKER/API FUNCTIONALITY IS DONE
 
 async function main() {
