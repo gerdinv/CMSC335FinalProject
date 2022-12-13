@@ -4,9 +4,9 @@ const path = require("path");
 const app = express();
 const bodyParser = require("body-parser"); /* To handle post parameters */
 require("dotenv").config({ path: path.resolve(__dirname, '.env') }) 
-/*const userName = process.env.MONGO_DB_USERNAME;
-const password = process.env.MONGO_DB_PASSWORD;
-const databaseAndCollection = {db: "CMSC335_DB", collection:"campApplicants"};*/
+const user = process.env.MONGO_DB_USERNAME 
+const pass = process.env.MONGO_DB_PASSWORD
+const database = {db: process.env.MONGO_DB_NAME, collection: process.env.MONGO_COLLECTION}
 const { MongoClient, ServerApiVersion } = require('mongodb');
 let client = null;
 
@@ -41,9 +41,6 @@ async function main()
 
     const { MongoClient, ServerApiVersion } = require('mongodb');
     require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
-    const user = process.env.MONGO_DB_USERNAME 
-    const pass = process.env.MONGO_DB_PASSWORD
-    const database = {db: process.env.MONGO_DB_NAME, collection: process.env.MONGO_COLLECTION}
 
     const uri = `mongodb+srv://${user}:${pass}@cluster0.pd476b3.mongodb.net/?retryWrites=true&w=majority`;
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
