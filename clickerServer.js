@@ -17,22 +17,19 @@ let networkMangager = new NetworkManager();
 
 main();
 
-// (Annie) ROUTES:
-app.get("/", (req, res) => {
-  res.render("mainPage");
-});
-app.get("/playPage", (req, res) => {
-  res.render("playPage");
-});
-app.post("/gamePage", async (req, res) => {
-  //Render HTML
-  let variables = {
-    numOfClicks: 0,
-    quote: "",
-  };
-  const collection = client.db(database.db).collection(database.collection);
-  const { name } = req.body;
-  const result = await collection.findOne({ name: name });
+//ROUTES:
+app.get("/",(req, res) => {res.render("mainPage");});
+app.get("/playPage", (req,res) => {res.render("playPage");});
+app.post("/gamePage",async (req,res) => {
+
+    //Render HTML
+    let variables = {
+        'numOfClicks':0,
+        'quote': ""
+    }
+    const collection = client.db(database.db).collection(database.collection)
+    const {name} = req.body
+    const result = await collection.findOne({name: name})
 
   if (result) {
     //have user should update a session user
@@ -67,8 +64,6 @@ async function main() {
   console.log(`Webserver started and running at http://localhost:${portNum}`);
 
   //3. Connect to the mongoDB database
-
-  //This doesn't work for some reason
   const uri = `mongodb+srv://${user}:${pass}@cluster0.pd476b3.mongodb.net/?retryWrites=true&w=majority`;
   const client = new MongoClient(uri, {
     useNewUrlParser: true,
@@ -89,7 +84,7 @@ async function main() {
       dataInput = dataInput.toString().trim();
       if (dataInput === "stop") {
         console.log("Shutting down the server");
-        // client.close();
+        client.close();
         process.exit(0);
       } else if (dataInput === "quote") {
         let quote = networkMangager.getRandomQuote();
