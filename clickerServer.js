@@ -13,16 +13,11 @@ let client = null;
 main();
 
 // (Annie) TODO ROUTES:
-app.get("/",(req, res) => {
-    res.render("mainPage");
-});
+app.get("/",(req, res) => {res.render("mainPage");});
+
+app.get("/playPage", (req,res) => {res.render("playPage");});
 
 //TODO: FOR WHEN THE CLICKER/API FUNCTIONALITY IS DONE
-app.get("/playPage", (req,res) => {
-});
-
-
-
 
 
 
