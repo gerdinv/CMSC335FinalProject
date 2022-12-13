@@ -65,8 +65,6 @@ async function main() {
   console.log(`Webserver started and running at http://localhost:${portNum}`);
 
   //3. Connect to the mongoDB database
-
-  //This doesn't work for some reason
   const uri = `mongodb+srv://${user}:${pass}@cluster0.pd476b3.mongodb.net/?retryWrites=true&w=majority`;
   const client = new MongoClient(uri, {
     useNewUrlParser: true,
@@ -87,7 +85,7 @@ async function main() {
       dataInput = dataInput.toString().trim();
       if (dataInput === "stop") {
         console.log("Shutting down the server");
-        // client.close();
+        client.close();
         process.exit(0);
       } else if (dataInput === "quote") {
         let quote = networkMangager.getRandomQuote();
