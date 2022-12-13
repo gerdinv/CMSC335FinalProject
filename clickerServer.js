@@ -25,7 +25,8 @@ app.post("/gamePage",async (req,res) => {
 
     //Render HTML
     let variables = {
-        'numOfClicks':0,
+        'Name': req.body.name,
+        'numOfClicks': 0,
         'quote': ""
     }
     const collection = client.db(database.db).collection(database.collection)
