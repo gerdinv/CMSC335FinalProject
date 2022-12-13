@@ -58,9 +58,8 @@ app.post("/savedSession", async (req, res) => {
   if (result) {
     const total = (result.numOfClicks + Number(numOfClicks))
     collection.updateOne({name: result.name},{$set: {numOfClicks: total}})
-    // db.student.updateOne({name: "Annu"}, {$set:{age:25}})
     
-    variables['totalClicks'] = numOfClicks
+    variables['totalClicks'] = total
   } else {
     //user doesn't exist somehow
     console.log("You're not supposed to be here")
