@@ -14,7 +14,7 @@ main();
 
 // (Annie) TODO ROUTES:
 app.get("/",(req, res) => {
-    app.render("mainPage");
+    res.render("mainPage");
 });
 
 
