@@ -12,9 +12,10 @@ let client = null;
 
 main();
 
-// (Annie) ROUTES:
+//ROUTES:
 app.get("/",(req, res) => {res.render("mainPage");});
 app.get("/playPage", (req,res) => {res.render("playPage");});
+app.get("/signUp",(req,res) => {res.render("signUp");});
 app.post("/gamePage",async (req,res) => {
 
     //Render HTML
@@ -27,19 +28,15 @@ app.post("/gamePage",async (req,res) => {
     const result = await collection.findOne({name: name})
 
     if (result) {
-        //have user should update a session user
-    } else {
+        //have user should update a session user} else {
         //user doesn't exist place user
         await collection.insertOne({name: name, 'numOfClicks': 0})
     }
 
     //res.render()
+    //TODO: FOR WHEN THE CLICKER/API FUNCTIONALITY IS DONE
     //Add userName to the Database
 })
-
-
-
-//TODO: FOR WHEN THE CLICKER/API FUNCTIONALITY IS DONE
 
 
 
@@ -63,8 +60,6 @@ async function main()
     console.log(`Webserver started and running at http://localhost:${portNum}`);
 
     //3. Connect to the mongoDB database
-
-    //This doesn't work for some reason
     const uri = `mongodb+srv://${user}:${pass}@cluster0.pd476b3.mongodb.net/?retryWrites=true&w=majority`;
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
         try {
@@ -81,7 +76,7 @@ async function main()
             dataInput = dataInput.toString().trim();
             if (dataInput === "stop") {
                 console.log("Shutting down the server");
-               // client.close();
+                client.close();
                 process.exit(0);
             }
             else { console.log(`Invalid command: ${dataInput}`);}
