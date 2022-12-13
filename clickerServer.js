@@ -12,10 +12,22 @@ let client = null;
 
 main();
 
-// (Annie) TODO ROUTES:
+// (Annie) ROUTES:
 app.get("/",(req, res) => {res.render("mainPage");});
-
 app.get("/playPage", (req,res) => {res.render("playPage");});
+app.post("/gamePage",(req,res) => {
+
+    //Render HTML
+    let variables = {
+        'numOfClicks':0,
+        'quote': None
+    }
+
+    //res.render()
+    //Add userName to the Database
+})
+
+
 
 //TODO: FOR WHEN THE CLICKER/API FUNCTIONALITY IS DONE
 
@@ -27,6 +39,7 @@ async function main()
     app.set("view engine", "ejs"); //Set app view engine as ejs  
     app.set("views", path.resolve(__dirname, "templates")); //Set app setting for views to templates folder 
     app.use(bodyParser.urlencoded({extended:false}));
+    app.use(express.static("css"));
     const args = process.argv;
 
     //2. Command Line Parsing
