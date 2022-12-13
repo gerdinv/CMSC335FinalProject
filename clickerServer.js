@@ -17,6 +17,11 @@ app.get("/",(req, res) => {
     res.render("mainPage");
 });
 
+//TODO: FOR WHEN THE CLICKER/API FUNCTIONALITY IS DONE
+app.get("/playPage", (req,res) => {
+});
+
+
 
 
 
@@ -41,6 +46,7 @@ async function main()
 
     //3. Connect to the mongoDB database
 
+    //This doesn't work for some reason
     /*const { MongoClient, ServerApiVersion } = require('mongodb');
     require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
 
