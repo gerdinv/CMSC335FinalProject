@@ -2,17 +2,17 @@
 <html lang="en">
     <head> 
         <meta charset="utf-8"> 
-		<title>Game Page </title>
+		<title>Play Page </title>
         <link rel="stylesheet" href="game.css" />	
 	</head>
 
 	<body>
-        <h1>play</h1>
-        <div id="play">
-		    <form action="/play" method="get">
-            
-			    Name: <input type="text" id="name" name="name"> <br>
-                
+        <h1>Game</h1>
+        <div id="game">
+		    <form action="/game" method="get">
+                Number of clicks: <%- numOfClicks %> <br>
+			    <input type="button" id="click" name="click" value="click"> <br>
+                Quote: <%- quote %> <br>
 		    </form>	
         </div>	
    </body>
