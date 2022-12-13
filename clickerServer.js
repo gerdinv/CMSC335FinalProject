@@ -14,6 +14,7 @@ const database = {
 const { MongoClient, ServerApiVersion } = require("mongodb");
 let client = null;
 let networkMangager = new NetworkManager();
+let session = {}
 
 main();
 
@@ -30,16 +31,20 @@ app.post("/gamePage",async (req,res) => {
     const collection = client.db(database.db).collection(database.collection)
     const {name} = req.body
     const result = await collection.findOne({name: name})
-
+  
+    //Add userName to the Database
   if (result) {
     //have user should update a session user
+    session = result
+    variables['numOfClicks'] = session.numOfClicks
   } else {
     //user doesn't exist place user
+    session = { name: name, numOfClicks: 0 }
     await collection.insertOne({ name: name, numOfClicks: 0 });
   }
 
-  //res.render()
-  //Add userName to the Database
+  res.render("gamePage", variables)
+
 });
 
 //TODO: FOR WHEN THE CLICKER/API FUNCTIONALITY IS DONE
@@ -65,7 +70,7 @@ async function main() {
 
   //3. Connect to the mongoDB database
   const uri = `mongodb+srv://${user}:${pass}@cluster0.pd476b3.mongodb.net/?retryWrites=true&w=majority`;
-  const client = new MongoClient(uri, {
+  client = new MongoClient(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     serverApi: ServerApiVersion.v1,
