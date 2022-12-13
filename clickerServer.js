@@ -20,7 +20,7 @@ app.post("/gamePage",(req,res) => {
     //Render HTML
     let variables = {
         'numOfClicks':0,
-        'quote': None
+        'quote': ""
     }
 
     //res.render()
