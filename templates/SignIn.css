@@ -1,8 +1,31 @@
+body {
+background-color: antiquewhite;
+} 
+
 #SignIn {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 550px;
     height: 200px;
-    border: 0.5em solid black; 
+    border: 0.2em solid black; 
 }
 
+#signUp {
+    background-color: white;
+    font-size: 1em;
+    width: 10em;  
+    height: 3em;
+}
+
+#play {
+    background-color: white;
+    font-size: 1em;
+    width: 10em;  
+    height: 3em;
+}
