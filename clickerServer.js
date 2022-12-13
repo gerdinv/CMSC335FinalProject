@@ -15,12 +15,22 @@ main();
 // (Annie) ROUTES:
 app.get("/",(req, res) => {res.render("mainPage");});
 app.get("/playPage", (req,res) => {res.render("playPage");});
-app.post("/gamePage",(req,res) => {
+app.post("/gamePage",async (req,res) => {
 
     //Render HTML
     let variables = {
         'numOfClicks':0,
         'quote': ""
+    }
+    const collection = client.db(database.db).collection(database.collection)
+    const {name} = req.body
+    const result = await collection.findOne({name: name})
+
+    if (result) {
+        //have user should update a session user
+    } else {
+        //user doesn't exist place user
+        await collection.insertOne({name: name, 'numOfClicks': 0})
     }
 
     //res.render()
