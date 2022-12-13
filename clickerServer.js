@@ -17,22 +17,6 @@ let networkMangager = new NetworkManager();
 
 main();
 
-// (Annie) ROUTES:
-app.get("/", (req, res) => {
-  res.render("mainPage");
-});
-app.get("/playPage", (req, res) => {
-  res.render("playPage");
-});
-app.post("/gamePage", async (req, res) => {
-  //Render HTML
-  let variables = {
-    numOfClicks: 0,
-    quote: "",
-  };
-  const collection = client.db(database.db).collection(database.collection);
-  const { name } = req.body;
-  const result = await collection.findOne({ name: name });
 //ROUTES:
 app.get("/",(req, res) => {res.render("mainPage");});
 app.get("/playPage", (req,res) => {res.render("playPage");});
