@@ -3,7 +3,7 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const bodyParser = require("body-parser"); /* To handle post parameters */
-require("dotenv").config({ path: path.resolve(__dirname, '.env') }) 
+require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
 const user = process.env.MONGO_DB_USERNAME 
 const pass = process.env.MONGO_DB_PASSWORD
 const database = {db: process.env.MONGO_DB_NAME, collection: process.env.MONGO_COLLECTION}
@@ -55,9 +55,6 @@ async function main()
     //3. Connect to the mongoDB database
 
     //This doesn't work for some reason
-    /*const { MongoClient, ServerApiVersion } = require('mongodb');
-    require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
-
     const uri = `mongodb+srv://${user}:${pass}@cluster0.pd476b3.mongodb.net/?retryWrites=true&w=majority`;
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
         try {
@@ -65,7 +62,7 @@ async function main()
         console.log("Connected to the database")
         } catch (e) {
         console.error(e);
-    } */
+    } 
 
     //4. Listen for user-shut down command
     console.log("Stop to shutdown the server: ")
