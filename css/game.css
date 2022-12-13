@@ -2,7 +2,7 @@ body {
     background-color: antiquewhite;
 }
 h1 {
-    margin: auto;
+    text-align: center;
 }
 
 #game {
@@ -13,12 +13,26 @@ h1 {
     border: 0.5em solid blue; 
 }
 #play {
-    display: flex;
+    display: block;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
+    margin: 0; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    line-height: 200px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 550px;
     height: 200px;
-    border: 0.5em solid black;
+    border: 0.1em solid black;
+    font-size: 3em; 
 }
+#play form {
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+  }
 input {
     margin: auto;
 }
