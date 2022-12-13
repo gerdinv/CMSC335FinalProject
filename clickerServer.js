@@ -4,9 +4,9 @@ const path = require("path");
 const app = express();
 const bodyParser = require("body-parser"); /* To handle post parameters */
 require("dotenv").config({ path: path.resolve(__dirname, '.env') }) 
-/*const userName = process.env.MONGO_DB_USERNAME;
-const password = process.env.MONGO_DB_PASSWORD;
-const databaseAndCollection = {db: "CMSC335_DB", collection:"campApplicants"};*/
+const user = process.env.MONGO_DB_USERNAME 
+const pass = process.env.MONGO_DB_PASSWORD
+const database = {db: process.env.MONGO_DB_NAME, collection: process.env.MONGO_COLLECTION}
 const { MongoClient, ServerApiVersion } = require('mongodb');
 let client = null;
 
@@ -38,14 +38,18 @@ async function main()
     console.log(`Webserver started and running at http://localhost:${portNum}`);
 
     //3. Connect to the mongoDB database
-    /*const uri = `mongodb+srv://${userName}:${password}@cluster0.bgfekqn.mongodb.net/?retryWrites=true&w=majority`;
-    client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-    try {
+
+    const { MongoClient, ServerApiVersion } = require('mongodb');
+    require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
+
+    const uri = `mongodb+srv://${user}:${pass}@cluster0.pd476b3.mongodb.net/?retryWrites=true&w=majority`;
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+        try {
         await client.connect();
         console.log("Connected to the database")
         } catch (e) {
         console.error(e);
-    } */
+    } 
 
     //4. Listen for user-shut down command
     console.log("Stop to shutdown the server: ")
