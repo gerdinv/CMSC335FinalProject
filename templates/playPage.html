@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+    <head> 
+        <meta charset="utf-8"> 
+		<title>Play Page </title>
+        <link rel="stylesheet" href="game.css" />	
+	</head>
+
+	<body>
+        <h1>Game</h1>
+        <div id="game">
+		    <form action="/game" method="get">
+                Number of clicks: <%- numOfClicks %> <br>
+			    <input type="button" id="click" name="click" value="click"> <br>
+                Quote: <%- quote %> <br>
+		    </form>	
+        </div>	
+   </body>
+</html>

@@ -1,0 +1,21 @@
+h1 {
+    margin: auto;
+}
+
+#game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border: 0.5em solid blue; 
+}
+#play {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border: 0.5em solid black;
+}
+input {
+    margin: auto;
+}
