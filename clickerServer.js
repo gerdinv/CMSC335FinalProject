@@ -13,7 +13,9 @@ let client = null;
 main();
 
 // (Annie) TODO ROUTES:
-
+app.get("/",(req, res) => {
+    app.render("mainPage");
+});
 
 
 
@@ -39,7 +41,7 @@ async function main()
 
     //3. Connect to the mongoDB database
 
-    const { MongoClient, ServerApiVersion } = require('mongodb');
+    /*const { MongoClient, ServerApiVersion } = require('mongodb');
     require("dotenv").config({ path: path.resolve(__dirname, 'credentials/.env') })
 
     const uri = `mongodb+srv://${user}:${pass}@cluster0.pd476b3.mongodb.net/?retryWrites=true&w=majority`;
@@ -49,7 +51,7 @@ async function main()
         console.log("Connected to the database")
         } catch (e) {
         console.error(e);
-    } 
+    } */
 
     //4. Listen for user-shut down command
     console.log("Stop to shutdown the server: ")
