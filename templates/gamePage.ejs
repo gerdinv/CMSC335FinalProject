@@ -3,17 +3,27 @@
     <head> 
         <meta charset="utf-8"> 
 		<title>Play Page </title>
-        <link rel="stylesheet" href="game.css" />	
+        <link rel="stylesheet" href="game.css">	
 	</head>
 
 	<body>
         <h1>Game</h1>
         <div id="game">
             <!--TODO: Display the user's name-->
-            Number of clicks: <%- numOfClicks %> <br>
-            <input type="button" id="click" name="click" value="click"> <br>
-            Quote: <%- quote %> <br>
-            <!--TODO: Button to Save the Data-->
+            <form action="/savedSession" method="post">
+                Number of clicks: <input type="text" id="numOfClicks" name="numOfClicks" readonly> <br>
+                <input type="button" id="click" name="click" value="click" onclick="updateNumOfClicks()"><br>
+                Quote: <%- quote %> <br>
+                <input type="submit" value="Save and Quit!">
+            </form>
         </div>	
    </body>
+   <script>
+        let numOfClicks = 0
+        // Make me a function that keeps track of the numOfClicks and updates the page with the new numOfClicks
+        function updateNumOfClicks() {
+            numOfClicks++
+            document.getElementById("numOfClicks").setAttribute("value", numOfClicks);
+        }
+    </script>
 </html>
