@@ -78,7 +78,6 @@ app.post("/savedSession", async (req, res) => {
   res.render("savedSession", variables);
 });
 
-
 async function main() {
   //1. Setup the express server
   app.set("view engine", "ejs"); //Set app view engine as ejs
