@@ -55,35 +55,6 @@ app.post("/gamePage", async (req, res) => {
   }
 });
 
-// app.post("/gamePage", async (req, res) => {
-//   let quote = await networkMangager.getRandomQuote();
-//   console.log("THIS IS THE QUOTE: " + quote);
-
-//   //Render HTML
-//   let variables = {
-//     Name: req.body.name,
-//     numOfClicks: 0,
-//     quote: "",
-//     author: "",
-//   };
-//   const collection = client.db(database.db).collection(database.collection);
-//   const { name } = req.body;
-//   const result = await collection.findOne({ name: name });
-
-//   //Add userName to the Database
-//   if (result) {
-//     //have user should update a session user
-//     session = result;
-//     variables["numOfClicks"] = session.numOfClicks;
-//   } else {
-//     //user doesn't exist place user
-//     session = { name: name, numOfClicks: 0 };
-//     await collection.insertOne({ name: name, numOfClicks: 0 });
-//   }
-
-//   res.render("gamePage", variables);
-// });
-
 app.post("/savedSession", async (req, res) => {
   let variables = { totalClicks: 0 };
 
@@ -107,7 +78,6 @@ app.post("/savedSession", async (req, res) => {
   res.render("savedSession", variables);
 });
 
-//TODO: FOR WHEN THE CLICKER/API FUNCTIONALITY IS DONE
 
 async function main() {
   //1. Setup the express server
