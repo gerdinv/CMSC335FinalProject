@@ -4,7 +4,7 @@
   "description": "A webpage clicker game that allows the user to store and delete their last session with account system",
   "main": "clickerServer.js",
   "scripts": {
-    "start": "node clickerServer.js 4006",
+    "start": "node index.js 4006",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
