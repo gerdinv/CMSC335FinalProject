@@ -13,61 +13,99 @@ const database = {
 };
 const { MongoClient, ServerApiVersion } = require("mongodb");
 let client = null;
-let networkMangager = new NetworkManager();
-let session = {}
+let networkManager = new NetworkManager();
+let session = {};
 
 main();
 
 //ROUTES:
-app.get("/",(req, res) => {res.render("mainPage");});
-app.get("/playPage", (req,res) => {res.render("playPage");});
-app.post("/gamePage",async (req,res) => {
-
-    //Render HTML
-    let variables = {
-        'Name': req.body.name,
-        'numOfClicks': 0,
-        'quote': ""
-    }
-    const collection = client.db(database.db).collection(database.collection)
-    const {name} = req.body
-    const result = await collection.findOne({name: name})
-  
-    //Add userName to the Database
-  if (result) {
-    //have user should update a session user
-    session = result
-    variables['numOfClicks'] = session.numOfClicks
-  } else {
-    //user doesn't exist place user
-    session = { name: name, numOfClicks: 0 }
-    await collection.insertOne({ name: name, numOfClicks: 0 });
-  }
-
-  res.render("gamePage", variables)
-
+app.get("/", (req, res) => {
+  res.render("mainPage");
+});
+app.get("/playPage", (req, res) => {
+  res.render("playPage");
 });
 
-app.post("/savedSession", async (req, res) => {
-    let variables = {'totalClicks': 0}
+app.post("/gamePage", async (req, res) => {
+  let variables = {
+    Name: req.body.name,
+    numOfClicks: 0,
+  };
+  networkManager.getRandomQuote(function (err, quote) {
+    variables["quote"] = err ? "Error getting quote" : quote["quote"];
+    variables["author"] = err ? "N/A" : quote["author"];
 
-    const collection = client.db(database.db).collection(database.collection)
-    const result = await collection.findOne(session)
-    const {numOfClicks} = req.body
-  
+    //Render HTML
+    res.render("gamePage", variables);
+  });
+
+  const collection = client.db(database.db).collection(database.collection);
+  const { name } = req.body;
+  const result = await collection.findOne({ name: name });
+
+  //Add userName to the Database
   if (result) {
-    const total = (result.numOfClicks + Number(numOfClicks))
-    collection.updateOne({name: result.name},{$set: {numOfClicks: total}})
-    
-    variables['totalClicks'] = total
+    //have user should update a session user
+    session = result;
+    variables["numOfClicks"] = session.numOfClicks;
+  } else {
+    //user doesn't exist place user
+    session = { name: name, numOfClicks: 0 };
+    await collection.insertOne({ name: name, numOfClicks: 0 });
+  }
+});
+
+// app.post("/gamePage", async (req, res) => {
+//   let quote = await networkMangager.getRandomQuote();
+//   console.log("THIS IS THE QUOTE: " + quote);
+
+//   //Render HTML
+//   let variables = {
+//     Name: req.body.name,
+//     numOfClicks: 0,
+//     quote: "",
+//     author: "",
+//   };
+//   const collection = client.db(database.db).collection(database.collection);
+//   const { name } = req.body;
+//   const result = await collection.findOne({ name: name });
+
+//   //Add userName to the Database
+//   if (result) {
+//     //have user should update a session user
+//     session = result;
+//     variables["numOfClicks"] = session.numOfClicks;
+//   } else {
+//     //user doesn't exist place user
+//     session = { name: name, numOfClicks: 0 };
+//     await collection.insertOne({ name: name, numOfClicks: 0 });
+//   }
+
+//   res.render("gamePage", variables);
+// });
+
+app.post("/savedSession", async (req, res) => {
+  let variables = { totalClicks: 0 };
+
+  const collection = client.db(database.db).collection(database.collection);
+  const result = await collection.findOne(session);
+  const { numOfClicks } = req.body;
+
+  if (result) {
+    const total = result.numOfClicks + Number(numOfClicks);
+    collection.updateOne(
+      { name: result.name },
+      { $set: { numOfClicks: total } }
+    );
+
+    variables["totalClicks"] = total;
   } else {
     //user doesn't exist somehow
-    console.log("You're not supposed to be here")
+    console.log("You're not supposed to be here");
   }
 
-
-    res.render("savedSession", variables)
-})
+  res.render("savedSession", variables);
+});
 
 //TODO: FOR WHEN THE CLICKER/API FUNCTIONALITY IS DONE
 

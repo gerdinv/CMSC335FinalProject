@@ -5,7 +5,8 @@ env.config();
 class NetworkManager {
   constructor() {}
 
-  getRandomQuote() {
+  getRandomQuote(callback) {
+    console.log("Random quote called");
     var category = "happiness";
     request.get(
       {
@@ -22,20 +23,58 @@ class NetworkManager {
 
         if (err || res.statusCode != 200) {
           console.log("err:" + body.toString("utf8"));
-          return errObj;
+          callback(errObj);
         } else {
+          console.log("Response received");
           let obj = JSON.parse(body);
           if (obj.length == 0) {
-            return errObj;
+            callback(errObj);
           } else {
-            console.log(obj);
-            return obj[0];
+            console.log(obj[0]);
+            callback(null, obj[0]);
           }
         }
       }
     );
   }
+
+  //   getRandomQuote() {
+  //     console.log("Random quote called");
+  //     var category = "happiness";
+  //     let a = request.get(
+  //       {
+  //         url: "https://api.api-ninjas.com/v1/quotes?category=" + category,
+  //         headers: {
+  //           "X-Api-Key": process.env.API_KEY,
+  //         },
+  //       },
+  //       function (err, res, body) {
+  //         let errObj = {
+  //           quote: "No quotes found",
+  //           author: "N/A",
+  //         };
+
+  //         if (err || res.statusCode != 200) {
+  //           console.log("err:" + body.toString("utf8"));
+  //           return errObj;
+  //         } else {
+  //           console.log("Response received");
+  //           let obj = JSON.parse(body);
+  //           if (obj.length == 0) {
+  //             return errObj;
+  //           } else {
+  //             console.log(obj[0]);
+  //             return obj[0];
+  //           }
+  //         }
+  //       }
+  //     );
+
+  //     console.log("This is a " + a);
+
+  //     return a;
+  //   }
 }
 
 module.exports = NetworkManager;
-exports = {NetworkManager};
+// exports = { NetworkManager };

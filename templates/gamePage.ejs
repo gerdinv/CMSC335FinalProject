@@ -1,38 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head> 
-        <meta charset="utf-8"> 
-		<title>Play Page </title>
-        <link rel="stylesheet" href="game.css">	
-	</head>
+  <head>
+    <meta charset="utf-8" />
+    <title>Play Page</title>
+    <link rel="stylesheet" href="game.css" />
+  </head>
 
-	<body>
-        <h1><i>Welcome Back <%-Name-%>!</i></h1>
-        <div id="game">
-            <form action="/savedSession" method="post">
-                Number of clicks: <input type="text" id="numOfClicks" name="numOfClicks" readonly> <br>
-                <input type="button" id="click" name="click" value="click" onclick="updateNumOfClicks()"><br>
-                Quote: <p id="quote" onload="addQuote"></p><br>
-                <input type="submit" value="Save and Quit!">
-            </form>
-        </div>	
-   </body>
-   <script type="module">
-        import {NetworkManager} from "../NetworkManager.js";
-        let numOfClicks = 0
+  <!-- <script type="module">
+    import { NetworkManager } from "../NetworkManager.js";
+    let numOfClicks = 0;
 
-        // Make me a function that keeps track of the numOfClicks and updates the page with the new numOfClicks
-        function updateNumOfClicks() {
-            numOfClicks++
-            document.getElementById("numOfClicks").setAttribute("value", numOfClicks);
-        }
+    // Make me a function that keeps track of the numOfClicks and updates the page with the new numOfClicks
+    function updateNumOfClicks() {
+      numOfClicks++;
+      document.getElementById("numOfClicks").setAttribute("value", numOfClicks);
+    }
 
-        function addQuote() {
-            let quote = document.getElementById("quote");
-            let n = new NetworkManager();
-            let rand_quote = n.getRandomQuote();
-            quote.innerHTML = rand_quote;
-            console.log(rand_quote);
-        }
-    </script>
+    function addQuote() {
+      let quote = document.getElementById("quote");
+      let n = new NetworkManager();
+      let rand_quote = n.getRandomQuote();
+      quote.innerHTML = rand_quote;
+      console.log(rand_quote);
+    }
+  </script> -->
+
+  <body>
+    <h1><i>Welcome Back <%-Name-%>!</i></h1>
+    <div id="game">
+      <form action="/savedSession" method="post">
+        Number of clicks:
+        <input type="text" id="numOfClicks" name="numOfClicks" readonly />
+        <br />
+        <input
+          type="button"
+          id="click"
+          name="click"
+          value="click"
+          onclick="updateNumOfClicks()"
+        /><br />
+
+        <p id="quote">Quote: <%-quote-%></p>
+        <p id="author">By: <%-author-%></p>
+        <br />
+        <input type="submit" value="Save and Quit!" />
+      </form>
+    </div>
+  </body>
 </html>
