@@ -17,8 +17,10 @@
             </form>
         </div>	
    </body>
-   <script>
+   <script type="module">
+        import {NetworkManager} from "../NetworkManager.js";
         let numOfClicks = 0
+
         // Make me a function that keeps track of the numOfClicks and updates the page with the new numOfClicks
         function updateNumOfClicks() {
             numOfClicks++
@@ -26,7 +28,11 @@
         }
 
         function addQuote() {
-
+            let quote = document.getElementById("quote");
+            let n = new NetworkManager();
+            let rand_quote = n.getRandomQuote();
+            quote.innerHTML = rand_quote;
+            console.log(rand_quote);
         }
     </script>
 </html>

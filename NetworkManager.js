@@ -38,3 +38,4 @@ class NetworkManager {
 }
 
 module.exports = NetworkManager;
+exports = {NetworkManager};
