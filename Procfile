@@ -1,1 +1,1 @@
-web: node ./app.js 4005
+web: node ./clickerServer.js 4005
